@@ -1,0 +1,87 @@
+{% extends "layout.html" %}<!--it will inherit properties from layout-->
+{% block content %}
+	<div calss="content-sectioon">
+		<form method="POST" action=""><!--it will post the content into the same route since action is null-->
+			{{form.hidden_tag()}}<!--for accessing variables in template wrap it in double curly braces. form instance is passed from flaskblog.py. hidden_tag method is adding a CSRF token or a cross-site request frogery. hidden_tag is a part of that secure key protection-->
+				  <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Today</legend>
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}<!--displaying the label from username field.label means the name not the text area-->
+                    <!--printing feedback if it is not correct-->
+                    {%if form.username.errors %}
+                    		{{form.username(class="form-control form-control-lg is-invalid")}}
+                    		 <div class="invalid-feedback">
+                    		 	{% for error in errors %}
+                    		 		<span>error</span>
+                    		 	{% endfor %}
+                    		 </div>
+                    {% else %}<!--if no errors-->
+                    		{{form.username(class="form-control form-control-lg")}}
+                    {% endif %}
+
+
+                     <!--username label is from forms.py in which registrationform class is defined which is imported from flaskblog.py-->
+                </div>
+               <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}<!--displaying the label-->
+                    {%if form.email.errors %}
+                    		{{form.email(class="form-control form-control-lg is-invalid")}}
+                    		 <div class="invalid-feedback">
+                    		 	{% for error in errors %}
+                    		 		<span>error</span>
+                    		 	{% endfor %}
+                    		 </div>
+                    {% else %}<!--if no errors-->
+                    		{{form.email(class="form-control form-control-lg")}}
+                    {% endif %}
+                   
+                </div>
+               
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}<!--displaying the label-->
+                    {%if form.password.errors %}
+                    		{{form.password(class="form-control form-control-lg is-invalid")}}
+                    		 <div class="invalid-feedback">
+                    		 	{% for error in errors %}
+                    		 		<span>error</span>
+                    		 	{% endfor %}
+                    		 </div>
+                    {% else %}<!--if no errors-->
+                    		{{form.password(class="form-control form-control-lg")}}
+                    {% endif %}
+                
+                </div>
+                <div class="form-group">
+                    {{ form.confirm_password.label(class="form-control-label") }}<!--displaying the label-->
+                    {%if form.confirm_password.errors %}
+                    		{{form.confirm_password(class="form-control form-control-lg is-invalid")}}
+                    		 <div class="invalid-feedback">
+                    		 	{% for error in errors %}
+                    		 		<span>error</span>
+                    		 	{% endfor %}
+                    		 </div>
+                    {% else %}<!--if no errors-->
+                    		{{form.confirm_password(class="form-control form-control-lg")}}
+                    {% endif %}
+                   
+                </div>
+                <div class="form-group">
+                    {{form.submit(class="btn btn-outline-info")}}
+                </div>
+               
+               
+               
+                
+            </fieldset>
+            
+        
+</div>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already Have An Account? <a class="ml-2" href="{{url_for('login')}}">Sign In</a><!--here login is not the route it is the function def login():-->
+        </small>
+
+
+		</form>
+	</div>
+{% endblock content %}
